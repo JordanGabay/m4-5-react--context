@@ -1,36 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import usePersistedState from '../hooks/usePersistedState.hook';
 import { createContext } from 'react';
-import { items } from '../components/Data'
 import GlobalStyles from "./GlobalStyles";
 import Home from "./Home";
 import Game from "./Game";
+import { GameContext } from './GameContext'
 
 export const AppContext = createContext();
 
 const App = () => {
-  const [numCookies, setNumCookies] = usePersistedState("num-cookies", 1000);
-  const [purchasedItems, setPurchasedItems] = usePersistedState("items", {
-    cursor: 0,
-    grandma: 0,
-    farm: 0,
-  });
-
+  const {
+    numCookies,
+    setNumCookies,
+    purchasedItems,
+    setPurchasedItems,
+    calculateCookiesPerSecond,
+  } = useContext(GameContext)
+  
   const incrementCookies = () => {
     setNumCookies((c) => c + 1);
   };
 
-  const calculateCookiesPerSecond = (purchasedItems) => {
-    return Object.keys(purchasedItems).reduce((acc, itemId) => {
-      const numOwned = purchasedItems[itemId];
-      const item = items.find((item) => item.id === itemId);
-      const value = item.value;
-
-      return acc + value * numOwned;
-    }, 0);
-  };
-  
   return (
     <AppContext.Provider
       value={{
