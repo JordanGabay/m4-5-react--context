@@ -5,7 +5,7 @@ import useInterval from "../hooks/use-interval.hook";
 import cookieSrc from "../cookie.svg";
 import Item from "./Item";
 import { items } from './Data';
-import { AppContext } from './App'
+import { GameContext } from './GameContext'
 
 
 const Game = () => {
@@ -16,7 +16,7 @@ const Game = () => {
     setPurchasedItems,
     incrementCookies,
     calculateCookiesPerSecond,
-  } = useContext(AppContext);
+  } = useContext(GameContext);
 
   useInterval(() => {
     const numOfGeneratedCookies = calculateCookiesPerSecond(purchasedItems);

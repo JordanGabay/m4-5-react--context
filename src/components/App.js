@@ -6,32 +6,12 @@ import Home from "./Home";
 import Game from "./Game";
 import { GameContext } from './GameContext'
 
+
 export const AppContext = createContext();
 
 const App = () => {
-  const {
-    numCookies,
-    setNumCookies,
-    purchasedItems,
-    setPurchasedItems,
-    calculateCookiesPerSecond,
-  } = useContext(GameContext)
-  
-  const incrementCookies = () => {
-    setNumCookies((c) => c + 1);
-  };
-
-  return (
-    <AppContext.Provider
-      value={{
-        numCookies,
-        setNumCookies,
-        purchasedItems,
-        setPurchasedItems,
-        incrementCookies,
-        calculateCookiesPerSecond,
-      }}
-    >
+ return (
+    <>
       <GlobalStyles />
       <Router>
         <Route exact path="/">
@@ -41,7 +21,7 @@ const App = () => {
           <Game/>
         </Route>
       </Router>
-      </AppContext.Provider>
+      </>
   );
 };
 
